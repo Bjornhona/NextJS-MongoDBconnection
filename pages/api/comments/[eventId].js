@@ -1,7 +1,7 @@
 import { connectDatabase, insertDocument, getAllDocuments } from "../../../helpers/db-util";
 
 const handler = async (req, res) => {
-  const eventId = req.query.eventId;
+  const { eventId } = req.query;
 
   let client;
   try {
@@ -13,7 +13,7 @@ const handler = async (req, res) => {
 
   if (req.method === 'GET') {
     try {
-      const comments = await getAllDocuments(client, 'comments', {_id: -1});
+      const comments = await getAllDocuments(client, 'comments', {_id: -1}, {eventId: eventId});
       res.status(200).json({ comments: comments});
     } catch (err) {
       res.status(500).json({ message: 'Failed to get all comments'});
@@ -45,7 +45,7 @@ const handler = async (req, res) => {
     }
 
     try {
-      result = await insertDocument(client, 'comments', newComment);
+      const result = await insertDocument(client, 'comments', newComment);
       newComment._id = result.insertedId;
       res.status(201).json({ message: 'Your comment was saved successfully', comment: newComment});
     } catch (err) {

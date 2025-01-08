@@ -32,7 +32,7 @@ function NewComment(props) {
     props.onAddComment({
       email: enteredEmail,
       name: enteredName,
-      text: enteredComment,
+      text: enteredComment
     });
   }
 
