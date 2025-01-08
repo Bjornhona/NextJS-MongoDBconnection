@@ -31,7 +31,7 @@ function Comments(props) {
     .then((response) => response.json())
     .then((data) => {
       setMessage(data.message);
-      setComments(prev => [...prev, data.comment]);
+      data.comment && setComments(prev => [...prev, data.comment]);
     })
   }
 
