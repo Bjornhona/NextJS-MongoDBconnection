@@ -20,8 +20,8 @@ function Comments(props) {
       .then(response => response.json())
       .then(data => {
         setComments(data.comments);
-      });
-      setIsLoading(false);
+        setIsLoading(false);
+      }).catch(error => setIsLoading(false));
     }
   }, [showComments, eventId]);
 
